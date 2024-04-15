@@ -59,5 +59,5 @@
 @endsection
 
 @section('scripts')
-
+    <script src="{{ asset('js/modules/user/form.js') }}"></script>
 @endsection
