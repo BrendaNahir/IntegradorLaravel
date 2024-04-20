@@ -3,3 +3,17 @@
 .customFileLabelAvatar::after {
     content: "Avatar" !important;
 }
+
+.userImage {
+    width: 35px;
+    height: 35px;
+}
+.textFirstName,
+.textLastName{
+    font-family: "Roboto_Regular";
+    font-size: 14px;
+}
+
+.displayNoneError{
+    display: none;
+}

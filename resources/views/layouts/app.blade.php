@@ -73,6 +73,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- Custom Styles --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Librery Toast -->
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">
@@ -128,6 +131,9 @@
 {{--     <!-- Datatable JS -->
     <script src="{{ asset('js/datatable.2.0.3.js') }}"></script> --}}
 
+    <!-- InputMask -->
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/inputmask/jquery.inputmask.min.js') }}"></script>
 
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -142,6 +148,51 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert_2.11.js') }}"></script>
+
+    <script>
+       toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "5000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+      }
+        /* GENERAL TOAST  */
+      @if(Session::has('notification'))
+
+          var type = "{{ Session::get('notification.alert-type', 'info') }}";
+          switch(type){
+              case 'info':
+                  toastr.info("{{ Session::get('notification.message') }}");
+                  break;
+
+              case 'warning':
+                  toastr.warning("{{ Session::get('notification.message') }}");
+                  break;
+              case 'success':
+                  toastr.success("{{ Session::get('notification.message') }}");
+                  break;
+              case 'error':
+                  toastr.error("{{ Session::get('notification.message') }}");
+                  break;
+          }
+      @endif
+      </script>
+
+
 
     @yield('scripts')
     <script>

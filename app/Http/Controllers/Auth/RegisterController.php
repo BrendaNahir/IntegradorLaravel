@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -65,11 +67,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        UserData::create([
+            'user_id'       =>  $user->id,
+            'first_name'    =>  '',
+            'last_name'     =>  '',
+            'dni'           =>  '',
+            'avatar'        =>  '',
+            'address'       =>  '',
+            'mobile'        =>  '',
+            /* Agregue la fecha del dia que se esta registrando porque debimos haber puesto nullable a este campo
+            ya que cuando se registra el usuario no es necesario lo agregue si cuando edita su perfil
+            La libreria Carbon es para gestionar las fechas de manera mas sencilla */
+            'date_of_birth' =>  Carbon::now()->format('Y-m-d')
+        ]);
+        $user->assignRole('Client');
+        return $user;
     }
 }

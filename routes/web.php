@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role');
 
 Route::group([
     'middleware'    =>  'auth',
@@ -27,5 +27,13 @@ Route::group([
 ],function(){
     Route::get('create','UserController@create')->name('user.create');
     Route::get('list','UserController@index')->name('user.index');
+    Route::get('{user}/edit','UserController@edit')->name('user.edit');
     Route::post('store','UserController@store')->name('user.store');
+    Route::post('search','UserController@searchUser')->name('user.search');
+    Route::get('destroy','UserController@destroy')->name('user.destroy');
+    Route::put('{user}/update', 'UserController@update')->name('user.update');
+    Route::get('show','UserController@show')->name('user.show');
+
 });
+Route::resource('provider', ProviderController::class);
+Route::resource('product', ProductController::class);
