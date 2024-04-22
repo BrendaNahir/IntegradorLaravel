@@ -9,46 +9,28 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title titleModule">Product List</h3> <a href="{{ route('product.create') }}" class="btn float-right colorCyan" role="button">+ Add Product</a>
+                    <h3 class="card-title titleModule">Purchase List</h3> <a href="{{ route('purchase.create') }}" class="btn float-right colorCyan" role="button">+ Add Purchase</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="listProduct" class="table table-bordered table-striped">
+                    <table id="listProvider" class="table table-bordered table-striped">
 
                         <thead>
                             <tr>
-                                <th style="width:30%; text-align:center">Description</th>
-                                <th style="width:10%; text-align:center">Cost Price</th>
-                                <th style="width:30%; text-align:center">Provider</th>
-                                <th style="width:20%; text-align:center">Stock</th>
+                                <th style="width:20%; text-align:center">Description</th>
+                                <th style="width:20%; text-align:center">Cost Price</th>
+                                <th style="width:20%; text-align:center">Mobile</th>
                                 <th style="text-align:center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            {{-- @foreach ($products as $product)
                                 <tr id='productId_{{$product->id}}'>
                                     <td>
                                         <span class="textFirstName"> {{ $product->description }}</span>
                                     </td>
                                     <td style=" text-align:center">
                                         <span class="textFirstName">{{ !empty($product->cost_price) ? $product->cost_price : '0.00' }}</span>
-                                    </td>
-                                    <td style=" text-align:center">
-                                        <span class="textFirstName">
-                                            @if (!empty($product->product_provider))
-                                                @foreach ($product->product_provider as $key => $provider)
-                                                    {{ $provider->first_name.', '.$provider->last_name }}
-                                                    @if ($key < (count($product->product_provider) -1))
-                                                        <br>
-                                                    @endif
-                                                @endforeach
-                                            @else
-                                                -
-                                            @endif
-                                        </span>
-                                    </td>
-                                    <td style=" text-align:center">
-                                        <span class="textFirstName">{{ !empty($product->stock) ? $product->stock : '0.00' }}</span>
                                     </td>
 
                                     <td>
@@ -72,15 +54,14 @@
                                     </td>
                                 </tr>
                                 @include('product/partials/actions')
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                         <tfoot>
                             <thead>
                                 <tr>
-                                    <th style="width:30%; text-align:center">Description</th>
-                                    <th style="width:10%; text-align:center">Cost Price</th>
-                                    <th style="width:30%; text-align:center">Provider</th>
-                                    <th style="width:10%; text-align:center">Stock</th>
+                                    <th style="width:20%; text-align:center">Description</th>
+                                    <th style="width:20%; text-align:center">Cost Price</th>
+                                    <th style="width:20%; text-align:center">Mobile</th>
                                     <th style="text-align:center">Actions</th>
                                 </tr>
                             </thead>
@@ -104,6 +85,6 @@
 
 @section('scripts')
 
-    <script src="{{ asset('js/modules/product/list.js') }}"></script>
+    <script src="{{ asset('js/modules/purchase/list.js') }}"></script>
 
 @endsection

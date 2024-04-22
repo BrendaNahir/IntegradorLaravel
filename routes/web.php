@@ -13,16 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth','adminUserRole']);
 
 Route::group([
-    'middleware'    =>  'auth',
+    'middleware'    =>  ['auth','adminUserRole'],
     'prefix'        =>  'user'
 ],function(){
     Route::get('create','UserController@create')->name('user.create');
@@ -35,5 +33,6 @@ Route::group([
     Route::get('show','UserController@show')->name('user.show');
 
 });
-Route::resource('provider', ProviderController::class);
-Route::resource('product', ProductController::class);
+Route::resource('provider', ProviderController::class)->middleware('adminUserRole');
+Route::resource('product', ProductController::class)->middleware('adminUserRole');
+Route::resource('purchase', PurchaseProductController::class)->middleware('adminUserRole');

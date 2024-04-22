@@ -25,6 +25,7 @@
                 font-family: 'Nunito';
             }
         </style>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body class="antialiased">
         <div class="wrapper">
@@ -35,10 +36,21 @@
                     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                         <!-- Left navbar links -->
                         <ul class="navbar-nav">
-
-                            <li class="nav-item">
-                                <a href="/" class="nav-link">Home</a>
-                            </li>
+                            @auth
+                                @if (Auth::user()->isAdminUser())
+                                    <li class="nav-item">
+                                        <a href="{{ url('/home') }}" class="nav-link">Home</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a href="/" class="nav-link">Home</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item">
+                                    <a href="/" class="nav-link">Home</a>
+                                </li>
+                            @endauth
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Contact</a>
                             </li>
@@ -79,26 +91,66 @@
 
                         <!-- SEARCH FORM -->
                         <form class="form-inline ml-0 ml-md-3">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                </div>
                             </div>
-                        </div>
                         </form>
                     </div>
-
                     <!-- Right navbar links -->
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                        @if (Route::has('login'))
+                            @auth
+                                {{-- @if (Auth::user()->isAdminUser())
+                                    <li class="nav-item">
+                                        <a href="{{ url('/home') }}" class="nav-link">Home</a>
+                                    </li>
+                                @endif --}}
+                                <li class="nav-item">
+                                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @else
+                                <li class="nav-item">
+                                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('register') }}" class="nav-link">Register</a>
+                                    </li>
+                                @endif
+                                {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                                @endif --}}
+                            @endif
+                    @endif
+
+                        {{-- <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li> --}}
+                    </ul>
+
+                    {{-- <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 
                         @if (Route::has('login'))
-                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block d-flex">
                             @auth
-                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                @if (Auth::user()->isAdminUser())
+                                    <a href="{{ url('/home') }}" class="nav-link text-sm text-gray-700">Home</a>
+                                @endif
+                                <a class="nav-link text-sm text-gray-700" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="nav-icon fas fa-sign-out-alt"></i>
-
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -113,7 +165,7 @@
                             @endif
                         </div>
                     @endif
-                    </ul>
+                    </ul> --}}
                     </div>
                 </nav>
                 <!-- /.navbar -->
@@ -123,78 +175,100 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-left: 0px;">
+
+
+
+
+
+
+
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+          {{--   <div class="content-header">
                 <div class="container">
                     <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0"> Top Navigation <small>Example 3.0</small></h1>
-                    </div><!-- /.col -->
-
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
+                    </div>
+                    </div>
+                </div>
+            </div> --}}
             <!-- /.content-header -->
 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    @foreach ($products as $key => $product)
+                        @if ($key==0)
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="active"></li>
+                        @else
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"></li>
+                        @endif
+                    @endforeach
+                  </ol>
+                  <div class="carousel-inner">
+
+                    @foreach ($products as $key => $product)
+                        @if ($key==0)
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{ $product->product_image }}" alt="First slide" style="height:600px !important">
+                            </div>
+                        @else
+                            <div class="carousel-item">
+                              <img class="d-block w-100" src="{{ $product->product_image }}" alt="Other slide" style="height:600px !important">
+                            </div>
+                        @endif
+                    @endforeach
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-custom-icon" aria-hidden="true">
+                      <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-custom-icon" aria-hidden="true">
+                      <i class="fas fa-chevron-right"></i>
+                    </span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- END ACCORDION & CAROUSEL-->
             <!-- Main content -->
             <div class="content">
             <div class="container">
                 <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                    @foreach ($products as $product )
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">{{ $product->description }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <img class="imgWelcome" src="{{ $product->product_image }}">
+                                    @guest
+                                        <a href="#" class="btn btn-primary">View More</a>
+                                    @else
+                                        <input class="countCart" type="number" name="count" value="1">
+                                        <a href="#" class="btn btn-primary">Add Cart</a>
+                                    @endguest
 
-                        <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
-                        </p>
-
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-
-                        <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
-                        </p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                    </div><!-- /.card -->
-                </div>
-                <!-- /.col-md-6 -->
-                <div class="col-lg-6">
-                    <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title m-0">Featured</h5>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
-
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title m-0">Featured</h5>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
-
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-                </div>
-                <!-- /.col-md-6 -->
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

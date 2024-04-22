@@ -4,25 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Provider;
+use App\Models\ProductProvider;
 use App\Helpers\Notification;
-use Exception;
 use Auth;
-use Session;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class PurchaseProductController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products = Product::all();
-        return view('product.list',compact('products'));
+        //
     }
 
     /**
@@ -32,7 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $providers = Provider::all();
+        $products = Product::all();
+        return view('purchase.create',compact('providers','products'));
     }
 
     /**
@@ -43,36 +41,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->file('product_image')) {
-            $image = $request->file('product_image');
-            $type = $image->getClientOriginalExtension();
-            $img = date('Y-m-d-H-i-s') .  '.' . $type;
-            $image->move('image/product/', $img);
+        //dd($request);
+        $provider = Provider::find($request->provider);
+        $product = Product::find($request->product);
+        if(!is_null($provider) && !is_null($product)){
+            $product->stock = $product->stock + $request->count;
+            $product->cost_price = $request->cost_price;
+            $product->increase = $request->increase;
+            $product->user_updated = Auth::user()->id;
+            $product->save();
 
-            $product_image = 'image/product/' . $img;
-        } else {
-            $product_image = '/dist/img/user2-160x160.jpg';
-        }
+            /* Pivot */
+            $productProvider = ProductProvider::where('product_id',$product->id)
+                ->where('provider_id',$provider->id)->first();
+            if(is_null($productProvider)){
+                ProductProvider::create([
+                    'product_id'    =>  $product->id,
+                    'provider_id'   =>  $provider->id,
+                ]);
+            }
 
-        $data = [
-            'description'       =>$request->description,
-            'product_image'     =>$product_image,
-            'cost_price'        =>null,
-            'increase'          =>null,
-            'stock'             =>null,
-            'enabled'           =>true,
-            'user_created'      =>Auth::user()->id,
-            'user_updated'      =>Auth::user()->id,
-        ];
-
-        $product = Product::create($data);
-        if(!is_null($product)){
-            $notification = Notification::Notification('Product Successfully Created', 'success');
+            $notification = Notification::Notification('Product Successfully Update', 'success');
             return redirect('product')->with('notification', $notification);
         }
         $notification = Notification::Notification('Error', 'error');
         return redirect('product/create')->with('notification', $notification);
-
     }
 
     /**

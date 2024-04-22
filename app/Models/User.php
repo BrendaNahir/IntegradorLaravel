@@ -51,6 +51,16 @@ class User extends Authenticatable
         return $this->hasOne(UserData::class, 'user_id', 'id');
     }
 
+    /* Functions Aux */
 
+    public function isAdminUser(){
+        return (auth()->user()->hasRole(['Administrator','User']));
+        /* if(auth()->user()->hasRole(['Administrator','User'])) return true;
+        return false; */
+    }
+
+    public function isClient(){
+        return (auth()->user()->hasRole('Client'));
+    }
 
 }

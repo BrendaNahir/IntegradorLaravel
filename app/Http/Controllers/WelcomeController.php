@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
-class PurchaseProduct extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class PurchaseProduct extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('welcome',compact('products'));
     }
 
     /**

@@ -56,7 +56,7 @@ class ProviderController extends Controller
         $provider = Provider::create($data);
         if(!is_null($provider)){
             $notification = Notification::Notification('Provider Successfully Created', 'success');
-            return redirect('provider/index')->with('notification', $notification);
+            return redirect('provider')->with('notification', $notification);
         }
         $notification = Notification::Notification('Error', 'error');
         return redirect('provider/create')->with('notification', $notification);

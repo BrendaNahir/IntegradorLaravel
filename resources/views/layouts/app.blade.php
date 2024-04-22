@@ -76,6 +76,8 @@
     <!-- Librery Toast -->
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 
+    <link rel="icon" href="{{asset('dist/img/user2-160x160.jpg')}}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">
