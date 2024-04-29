@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -91,204 +91,68 @@
                             </li>
                         </ul>
 
-                        <!-- SEARCH FORM -->
-                        <form class="form-inline ml-0 ml-md-3">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                </div>
-                            </div>
-                        </form>
+
                     </div>
                     <!-- Right navbar links -->
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                         @if (Route::has('login'))
                             @auth
-                                @guest
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart.index') }}" class="nav-link" >Cart</a>
-                                    </li>
-                                @endguest
+                                <li class="nav-item">
+                                    <a href="{{ route('cart.index') }}" class="nav-link" >Cart</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            @else
-                                <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="nav-link">Login</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a href="{{ route('register') }}" class="nav-link">Register</a>
-                                    </li>
-                                @endif
-                                {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                                @endif --}}
                             @endif
                     @endif
-
-                        {{-- <li class="nav-item">
-                            <a href="/" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contact</a>
-                        </li> --}}
                     </ul>
-
-                    {{-- <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-
-                        @if (Route::has('login'))
-                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block d-flex">
-                            @auth
-                                @if (Auth::user()->isAdminUser())
-                                    <a href="{{ url('/home') }}" class="nav-link text-sm text-gray-700">Home</a>
-                                @endif
-                                <a class="nav-link text-sm text-gray-700" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                                @endif
-                            @endif
-                        </div>
-                    @endif
-                    </ul> --}}
                     </div>
                 </nav>
                 <!-- /.navbar -->
 
-
-
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-left: 0px;">
-
-
-
-
-
-
-
-            <!-- Content Header (Page header) -->
-          {{--   <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0"> Top Navigation <small>Example 3.0</small></h1>
-                    </div>
-                    </div>
-                </div>
-            </div> --}}
-            <!-- /.content-header -->
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-
-              <!-- /.card-header -->
-              <div class="card-body">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    @foreach ($products as $key => $product)
-                        @if ($key==0)
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="active"></li>
-                        @else
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"></li>
-                        @endif
-                    @endforeach
-                  </ol>
-                  <div class="carousel-inner">
-
-                    @foreach ($products as $key => $product)
-                        @if ($key==0)
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ $product->product_image }}" alt="First slide" style="height:600px !important">
-                            </div>
-                        @else
-                            <div class="carousel-item">
-                              <img class="d-block w-100" src="{{ $product->product_image }}" alt="Other slide" style="height:600px !important">
-                            </div>
-                        @endif
-                    @endforeach
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-custom-icon" aria-hidden="true">
-                      <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-custom-icon" aria-hidden="true">
-                      <i class="fas fa-chevron-right"></i>
-                    </span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-        <!-- END ACCORDION & CAROUSEL-->
             <!-- Main content -->
             <div class="content">
-            <div class="container">
-                <div class="row">
-                    @foreach ($products as $product )
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">{{ $product->description }}</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <img class="imgWelcome" src="{{ $product->product_image }}">
-                                        </div>
-                                        @guest
-                                            <div class="col-9">
-                                                <a href="#" class="btn btn-primary">View More</a>
-                                            </div>
-                                        @else
-                                            <div class="col-5">
-                                                <p>Price: {{ $product->cost_price }}</p>
-                                                <p>Stock Disponible: {{ $product->stock }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <form method="POST" action="{{ route('cart.store') }}">
-                                                    @csrf
-                                                    <input type="hidden" name="cartId" value="{{ $product->id }}">
-                                                    <input class="countCart" type="number" name="count" id="count_{{ $product->id }}" value="1">
-                                                    <button type="submit" class="btn btn-primary">Add Cart</button>
-                                                </form>
-                                            </div>
-                                        @endguest
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+                <div class="container">
+                    <div class="row col-12 mt-4">
+                                <h2>Cart</h2>
+                                <table id="cartList" class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Count</th>
+                                        <th>Price</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($cart->carts_details as $detail)
+                                            <tr>
+                                                <td>{{ $detail->product->description }}</td>
+                                                <td>{{ $detail->count }}</td>
+                                                <td>{{ number_format($detail->cost_price,2,'.',',') }}</td>
+                                                {{-- <td>$ {{number_format((((($detail->increase * $detail->cost_price) / 100) + $detail->cost_price) * $detail->count),2,',','.')  }}</td> --}}
+                                                <td>$ {{ number_format($detail->costPrice,2,'.',',') }}</td>
+                                            </tr>
+                                        @endforeach
+
+
+                                    </tbody>
+                                    <tfoot>
+                                        <th colspan="3" class="text-right">Total</th>
+                                        <th>$ {{ number_format($cart->total,2,'.',',') }}</th>
+                                    </tfoot>
+                                </table>
+
+
+
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
         </div>
@@ -309,7 +173,7 @@
             <!-- Default to the left -->
             <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
         </footer>
-        </div>
+    </div>
 
 
     <!-- REQUIRED SCRIPTS -->
@@ -320,6 +184,7 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
 
     </body>
 
