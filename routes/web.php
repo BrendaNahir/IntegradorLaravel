@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestNewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,5 @@ Route::resource('provider', ProviderController::class)->middleware('adminUserRol
 Route::resource('product', ProductController::class)->middleware('adminUserRole');
 Route::resource('purchase', PurchaseProductController::class)->middleware('adminUserRole');
 Route::resource('cart', CartController::class)->middleware('clientUserRole');
+
+
