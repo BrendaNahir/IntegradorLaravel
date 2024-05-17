@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title titleModule">Product List</h3> <a href="{{ route('product.create') }}" class="btn float-right colorCyan" role="button">+ Add Product</a>
+                    <h3 class="card-title titleModule">LISTADO DE PRODUCTOS</h3> <a href="{{ route('product.create') }}" class="btn float-right colorCyan" role="button">+ Add Product</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -17,6 +17,8 @@
 
                         <thead>
                             <tr>
+                            <th style="width: 20%; text-align: center">Imagen</th>
+
                                 <th style="width:30%; text-align:center">Description</th>
                                 <th style="width:10%; text-align:center">Cost Price</th>
                                 <th style="width:30%; text-align:center">Provider</th>
@@ -27,6 +29,14 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr id='productId_{{$product->id}}'>
+                                <td style="text-align: center">
+    @if(!empty($product->product_image))
+        <img src="{{ asset($product->product_image) }}" alt="Producto Imagen" style="max-width: 100px; max-height: 100px;">
+    @else
+        <p>No hay imagen</p>
+    @endif
+</td>
+
                                     <td>
                                         <span class="textFirstName"> {{ $product->description }}</span>
                                     </td>
@@ -74,17 +84,7 @@
                                 @include('product/partials/actions')
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <thead>
-                                <tr>
-                                    <th style="width:30%; text-align:center">Description</th>
-                                    <th style="width:10%; text-align:center">Cost Price</th>
-                                    <th style="width:30%; text-align:center">Provider</th>
-                                    <th style="width:10%; text-align:center">Stock</th>
-                                    <th style="text-align:center">Actions</th>
-                                </tr>
-                            </thead>
-                        </tfoot>
+                     
                     </table>
                 </div>
                 <!-- /.card-body -->

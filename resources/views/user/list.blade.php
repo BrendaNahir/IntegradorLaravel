@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title titleModule">User List</h3> <a href="{{ route('user.create') }}" class="btn float-right colorCyan" role="button">+ Add User</a>
+                    <h3 class="card-title titleModule">LISTADO DE USUARIOS</h3> <a href="{{ route('user.create') }}" class="btn float-right colorCyan" role="button">+ Add User</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -23,7 +23,7 @@
                                 <th style="width:15%; text-align:center">Avatar</th>
                                 <th style="width:15%; text-align:center">Name</th>
                                 <th style="width:15%; text-align:center">UserName</th>
-                                <th style="width:10%; text-align:center">Type</th>
+                                <th style="width:10%; text-align:center">Rol</th>
                                 <th style="width:15%; text-align:center">Email</th>
                                 <th style="width:20%; text-align:center">First Name, Last Name</th>
                                 <th style="text-align:center">Actions</th>
@@ -34,9 +34,9 @@
                                 <tr id='userId_{{$user->id}}'>
                                     <td style="text-align: center">
                                         @if(!empty($user->userdata))
-                                            <img src="{{ url($user->userdata->avatar) }}" class="elevation-2 userImage" alt="User Image">
+                                            <img src="{{ url($user->userdata->avatar) }}" class="elevation-2 userImage" alt="User Image1">
                                         @else
-                                            <img src="{{ asset('/dist/img/user2-160x160.jpg') }}" class="elevation-2 userImage" alt="User Image">
+                                            <img src="{{ asset('/dist/img/user2-160x160.jpg') }}" class="elevation-2 userImage" alt="User Image2">
                                         @endif
                                     </td>
                                     <td>
@@ -92,19 +92,7 @@
                                 @include('user/partials/actions')
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <thead>
-                                <tr>
-                                    <th style="width:15%; text-align:center">Avatar</th>
-                                    <th style="width:15%; text-align:center">Name</th>
-                                    <th style="width:15%; text-align:center">UserName</th>
-                                    <th style="width:10%; text-align:center">Type</th>
-                                    <th style="width:15%; text-align:center">Email</th>
-                                    <th style="width:20%; text-align:center">First Name, Last Name</th>
-                                    <th style="text-align:center">Actions</th>
-                                </tr>
-                            </thead>
-                        </tfoot>
+                        
                     </table>
                 </div>
                 <!-- /.card-body -->

@@ -62,5 +62,4 @@ class User extends Authenticatable
     public function isClient(){
         return (auth()->user()->hasRole('Client'));
     }
-
 }
