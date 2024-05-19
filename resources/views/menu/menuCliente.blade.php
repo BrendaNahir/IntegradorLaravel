@@ -27,27 +27,21 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-               <h5> Administrador </h5>
+<h5> Cliente </h5>
 
                <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
-                    User
+                   Usuario
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('user.create') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>New</p>
-                    </a>
-                  </li>
                   <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>List</p>
+                      <p>Listado</p>
                     </a>
                   </li>
 
@@ -57,21 +51,15 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
-                    Provider
+                    Proveedores
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('provider.create') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>New</p>
-                    </a>
-                  </li>
                   <li class="nav-item">
                     <a href="{{ route('provider.index') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>List</p>
+                      <p>Listado</p>
                     </a>
                   </li>
 
@@ -81,17 +69,11 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
-                    Product
+                    Productos
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('product.create') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>New</p>
-                    </a>
-                  </li>
                   <li class="nav-item">
                     <a href="{{ route('product.index') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -101,11 +83,6 @@
 
                 </ul>
             
-
-          
-          
-          
-
 
           <li class="nav-header">SEPARATION</li>
           <li class="nav-item">
@@ -175,3 +152,4 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+

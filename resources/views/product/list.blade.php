@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @extends('layouts.nav')
-@extends('menu.menu')
+@if(auth()->check() && auth()->user()->roles->isNotEmpty())
+    @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
+        @include('menu.menuCliente')
+    @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
+        @include('menu.menu')
+    @endif
+@endif
 @section('content')
 
 
@@ -9,7 +15,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title titleModule">LISTADO DE PRODUCTOS</h3> <a href="{{ route('product.create') }}" class="btn float-right colorCyan" role="button">+ Add Product</a>
+                    <h3 class="card-title titleModule">LISTADO DE PRODUCTOS</h3> 
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -23,7 +29,9 @@
                                 <th style="width:10%; text-align:center">Cost Price</th>
                                 <th style="width:30%; text-align:center">Provider</th>
                                 <th style="width:20%; text-align:center">Stock</th>
-                                <th style="text-align:center">Actions</th>
+                                @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
+                                    <th style="text-align:center">Actions</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -62,6 +70,7 @@
                                     </td>
 
                                     <td>
+                                    @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="btn paddBto" data-user="{{$product}}" data-toggle="modal" data-target="#showUser-{{$product->id}}" data-title="View">
                                                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="#4099D4" xmlns="http://www.w3.org/2000/svg">
@@ -79,6 +88,7 @@
                                             </button>
 
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
                                 @include('product/partials/actions')

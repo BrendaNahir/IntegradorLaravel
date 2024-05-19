@@ -18,6 +18,11 @@ class WelcomeController extends Controller
         return view('welcome',compact('products'));
     }
 
+    public function indexprincipal()
+    {
+        return view('principal');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

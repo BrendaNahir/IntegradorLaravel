@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@indexprincipal');
 
 Auth::routes();
 
@@ -38,5 +38,5 @@ Route::resource('provider', ProviderController::class)->middleware('adminUserRol
 Route::resource('product', ProductController::class)->middleware('adminUserRole');
 Route::resource('purchase', PurchaseProductController::class)->middleware('adminUserRole');
 Route::resource('cart', CartController::class)->middleware('clientUserRole');
-
+//si quiero entrar como administrador a 127.0.0.1/cart me lleva a la pag principal
 

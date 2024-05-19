@@ -1,7 +1,14 @@
 @extends('layouts.app')
 @extends('layouts.nav')
-@extends('menu.menu')
 @section('content')
+ <!-- Verifica si el usuario está autenticado y muestra el menú adecuado -->
+@if(auth()->check() && auth()->user()->roles->isNotEmpty())
+    @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
+        @include('menu.menuCliente')
+    @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
+        @include('menu.menu')
+    @endif
+@endif
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -10,7 +17,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Escritorio</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
