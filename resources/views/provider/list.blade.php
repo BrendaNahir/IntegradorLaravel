@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @extends('layouts.nav')
-@extends('menu.menu')
+@if(auth()->check() && auth()->user()->roles->isNotEmpty())
+    @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
+        @include('menu.menuCliente')
+    @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
+        @include('menu.menu')
+    @endif
+@endif
 @section('content')
 
 
@@ -21,7 +27,9 @@
                                 <th style="width:20%; text-align:center">Last Name</th>
                                 <th style="width:20%; text-align:center">Address</th>
                                 <th style="width:20%; text-align:center">Mobile</th>
+                                @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                 <th style="text-align:center">Actions</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +48,7 @@
                                         <span class="textFirstName">{{ $provider->mobile }}</span></span>
                                     </td>
                                     <td>
+                                    @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="btn paddBto" data-user="{{$provider}}" data-toggle="modal" data-target="#showUser-{{$provider->id}}" data-title="View">
                                                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="#4099D4" xmlns="http://www.w3.org/2000/svg">
@@ -57,22 +66,13 @@
                                             </button>
 
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
                                 @include('provider/partials/actions')
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <thead>
-                                <tr>
-                                    <th style="width:20%; text-align:center">First Name</th>
-                                    <th style="width:20%; text-align:center">Last Name</th>
-                                    <th style="width:20%; text-align:center">Address</th>
-                                    <th style="width:20%; text-align:center">Mobile</th>
-                                    <th style="text-align:center">Actions</th>
-                                </tr>
-                            </thead>
-                        </tfoot>
+                     
                     </table>
                 </div>
                 <!-- /.card-body -->
