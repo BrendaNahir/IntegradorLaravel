@@ -38,7 +38,7 @@
                         <input type="text" class="form-control" value="{{ !empty($user->userdata) ? $user->userdata->first_name : '' }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Last Name</label>
+                        <label>Apellido</label>
                         <input type="text" class="form-control" value="{{ !empty($user->userdata) ? $user->userdata->last_name : '' }}" disabled>
                     </div>
                     <div class="form-group">
