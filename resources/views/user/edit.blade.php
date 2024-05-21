@@ -37,7 +37,7 @@
               <!-- /.card-header -->
 
               <!-- form start -->
-              <form method="POST" action="{{ route('user.update',$user->id) }}" onsubmit="return validateForm();" enctype="multipart/form-data" autocomplete="off">
+              <form method="POST" action="{{ route('user.update',$user->id) }}" onsubmit="return validateForm();" enctype="multipart/form-data" autocomplete="on">
                     @method('PUT')
                     @csrf
                     @include('user.partials.form')

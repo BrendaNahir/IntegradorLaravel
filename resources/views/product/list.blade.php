@@ -70,7 +70,7 @@
                                     </td>
 
                                     <td>
-                                    @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
+                                         @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="btn paddBto" data-user="{{$product}}" data-toggle="modal" data-target="#showUser-{{$product->id}}" data-title="View">
                                                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="#4099D4" xmlns="http://www.w3.org/2000/svg">

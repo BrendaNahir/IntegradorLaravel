@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label class="role">Role</label>
-        <select class="form-control select2 select2-secondary" name="role" data-dropdown-css-class="select2-secondary" id="role" style="width: 100%;"  {{ !empty($user) ? 'disabled' : ''}}>
+        <select name="role" data-dropdown-css-class="select2-secondary" id="role" style="width: 100%;">
             <option selected="selected" disabled>Select</option>
             @foreach ($roles as $role)
                 @if (!empty($user) && !empty($user->roles[0]))
@@ -38,9 +38,9 @@
                     <option value="{{$role->id}}">{{ $role->name }}</option>
                 @endif
             @endforeach
-            {{-- <option value="1">Admin</option>
-            <option value="2">Client</option>
-            <option value="3">User</option> --}}
+            {{-- <option value="1">Client</option>
+            <option value="2">User</option>
+            <option value="3">Administrator</option> --}}
         </select>
         @if($errors->has('role'))
             <p class="text-danger">{{ $errors->first('role') }}</p>

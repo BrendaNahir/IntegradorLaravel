@@ -83,6 +83,30 @@
 
                 </ul>
             
+                <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Purchase
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('purchase.create') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>New</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('purchase.index') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>List</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
 
           <li class="nav-header">SEPARATION</li>
           <li class="nav-item">
