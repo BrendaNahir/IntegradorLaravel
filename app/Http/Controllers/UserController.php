@@ -175,7 +175,7 @@ class UserController extends Controller
 
             $user->name = $request->name;
             $user->username = $request->username;
-            $user->password = Hash::make($request->password);
+            $user->password = $request->password;
             $user->save();
             $userData = UserData::where('user_id',$user->id)->first();
             $userData->first_name = $request->first_name;

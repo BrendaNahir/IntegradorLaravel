@@ -1,14 +1,25 @@
 @extends('layouts.app')
 @extends('layouts.nav')
 @section('content')
- <!-- Verifica si el usuario está autenticado y muestra el menú adecuado -->
-@if(auth()->check() && auth()->user()->roles->isNotEmpty())
+ <!--Verifica si el usuario está autenticado y muestra el menú adecuado -->
+ <@if(auth()->check() && auth()->user()->roles->isNotEmpty())
     @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
-        @include('menu.menuCliente')
+      @include('menu.menuCliente')
     @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
-        @include('menu.menu')
+      @include('menu.menu')
     @endif
 @endif
+
+<!--@auth
+  @if (Auth::user()->isAdminUser())
+    @include('menu.menu')
+  @else
+    @include('menu.menuCliente')
+  @endif
+@endauth-->
+
+
+                             
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
