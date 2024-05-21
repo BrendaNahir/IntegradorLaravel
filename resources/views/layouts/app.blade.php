@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'PetShop') }}</title>
+    <title>{{ config('app.name', 'Mascotilandia') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -82,7 +82,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">
         <div class="wrapper">
-            @yield('nav')
+           @yield('nav')
             @yield('menu')
             <main class="py-4">
                 @yield('content')

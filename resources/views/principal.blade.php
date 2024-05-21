@@ -2,7 +2,7 @@
 @extends('layouts.nav_guest')
 @section('content')
 <div class="container">
-    <img src="{{ asset('image\logo.jpg') }}" alt="Mascotas" class="hero-image">
+    <img src="{{ asset('image\logo.jpeg') }}" alt="Mascotas" class="hero-image">
     <h1> Mascotilandia Correntina</h1>
 
     <head>

@@ -2,7 +2,14 @@
 
 use App\Http\Controllers\TestNewController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubscriptionController;
 
+
+Route::get('/', function () {
+    return view('principal');
+});
+
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 
 
 Route::get('/', 'WelcomeController@indexprincipal');
