@@ -57,9 +57,9 @@ class ProductController extends Controller
         $data = [
             'description'       =>$request->description,
             'product_image'     =>$product_image,
-            'cost_price'        =>null,
+            'cost_price'        =>$request->cost_price,
             'increase'          =>null,
-            'stock'             =>null,
+            'stock'             =>$request->stock,
             'enabled'           =>true,
             'user_created'      =>Auth::user()->id,
             'user_updated'      =>Auth::user()->id,

@@ -7,6 +7,18 @@
             <input type="text" class="form-control" name='description' maxlength="100" size="100" required>
         </div>
         <div class="col-2 text-right">
+            <label for="code" class="col-form-label text-right colorLabel code">Precio:</label>
+        </div>
+        <div class="col-4">
+            <input type="text" class="form-control" name='cost_price' maxlength="100" size="100" required>
+        </div>
+        <div class="col-2 text-right">
+            <label for="code" class="col-form-label text-right colorLabel code">Stock:</label>
+        </div>
+        <div class="col-4">
+            <input type="text" class="form-control" name='stock' maxlength="100" size="100" required>
+        </div>
+        <div class="col-2 text-right">
             <label class="col-form-label text-right colorLabel">Image:</label>
         </div>
         <div class="col-3">

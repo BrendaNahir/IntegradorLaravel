@@ -1,12 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.nav')
-@if(auth()->check() && auth()->user()->roles->isNotEmpty())
-    @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
-        @include('menu.menuCliente')
-    @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
-        @include('menu.menu')
-    @endif
-@endif
+@extends('menu.menu')
 @section('content')
 
 
@@ -18,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title titleModule">LISTADO DE USUARIOS</h3> 
+                    <h3 class="card-title titleModule">LISTADO DE USUARIOS</h3> <a href="{{ route('user.create') }}" class="btn float-right colorCyan" role="button">+ Add User</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -29,12 +23,10 @@
                                 <th style="width:15%; text-align:center">Avatar</th>
                                 <th style="width:15%; text-align:center">Name</th>
                                 <th style="width:15%; text-align:center">UserName</th>
-                                <th style="width:10%; text-align:center">Rol</th>
+                                <th style="width:10%; text-align:center">Type</th>
                                 <th style="width:15%; text-align:center">Email</th>
                                 <th style="width:20%; text-align:center">First Name, Last Name</th>
-                                @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                 <th style="text-align:center">Actions</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,9 +34,9 @@
                                 <tr id='userId_{{$user->id}}'>
                                     <td style="text-align: center">
                                         @if(!empty($user->userdata))
-                                            <img src="{{ url($user->userdata->avatar) }}" class="elevation-2 userImage" alt="User Image1">
+                                            <img src="{{ url($user->userdata->avatar) }}" class="elevation-2 userImage" alt="User Image">
                                         @else
-                                            <img src="{{ asset('/dist/img/user2-160x160.jpg') }}" class="elevation-2 userImage" alt="User Image2">
+                                            <img src="{{ asset('/dist/img/user2-160x160.jpg') }}" class="elevation-2 userImage" alt="User Image">
                                         @endif
                                     </td>
                                     <td>
@@ -77,7 +69,6 @@
                                         @endif
                                     </td>
                                     <td>
-                                    @if(auth()->user()->roles->isNotEmpty() && auth()->user()->roles[0]->id == 3)
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="btn paddBto" data-user="{{$user}}" data-toggle="modal" data-target="#showUser-{{$user->id}}" data-title="View">
                                                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="#4099D4" xmlns="http://www.w3.org/2000/svg">
@@ -96,13 +87,12 @@
                                             </button>
 
                                         </div>
-                                        @endif
                                     </td>
                                 </tr>
                                 @include('user/partials/actions')
                             @endforeach
                         </tbody>
-                        
+                    
                     </table>
                 </div>
                 <!-- /.card-body -->
@@ -113,10 +103,6 @@
     </div>
     <!-- /.row -->
 </div>
-
-
-
-
 
 @endsection
 
