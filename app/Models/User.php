@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function isClient(){
         return (auth()->user()->hasRole('Client'));
     }
+    public function getRoleAttribute($value)
+    {
+        return $this->attributes['role'];
+    }
 }

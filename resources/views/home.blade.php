@@ -5,8 +5,10 @@
  <@if(auth()->check() && auth()->user()->roles->isNotEmpty())
     @if(auth()->user()->roles[0]->id == 1) <!-- ID 1 para cliente -->
       @include('menu.menuCliente')
+      
     @elseif(auth()->user()->roles[0]->id == 3) <!-- ID 3 para admi -->
       @include('menu.menu')
+      
     @endif
 @endif
 

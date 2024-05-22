@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
 
 
-Route::get('/', function () {
+Route::get('/principal', function () {
     return view('principal');
 });
 

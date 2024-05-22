@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('Iniciar Sesión') }}</div>
 
                 <div class="card-body">
                         @if (Session::has('flash_message'))
@@ -19,7 +19,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="login" class="col-md-4 col-form-label text-md-end">{{ __('Email Address | Username') }}</label>
+                            <label for="login" class="col-md-4 col-form-label text-md-end">{{ __('Usuario o Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
@@ -46,7 +46,7 @@
                         </div> -->
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -56,6 +56,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('¿Olvidaste tu contraseña?') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
 
@@ -65,7 +70,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Recordarme') }}
                                     </label>
                                 </div>
                             </div>
@@ -74,12 +79,16 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Iniciar sesión') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                <button type="button" class="btn btn-outline-secondary" onclick="resetFormAndRedirect()">
+                                    {{ __('Cancelar') }}
+                                </button>
+
+                                @if (Route::has('register'))
+                                    <a class="btn btn-light" href="{{ route('register') }}">
+                                        {{ __('¿Sos nuevo? Registrate aquí') }}
                                     </a>
                                 @endif
                             </div>
@@ -90,4 +99,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function resetFormAndRedirect() {
+        document.getElementById('register-form').reset();
+        window.location.href = '{{ url('/') }}';
+    }
+</script>
 @endsection

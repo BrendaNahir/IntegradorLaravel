@@ -1,54 +1,38 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-
-import VueRouter from 'vue-router';
-import VueSweetAlert2 from 'vue-sweetalert2';
-
-import Appmainvue from './components/App.vue';
+import { createApp } from 'vue';
+import App from './App.vue';
 
 
-import CommentIndex from './components/Comments/Index.vue';
-import CommentCreate from './components/Comments/Create.vue';
-import CommentEdit from './components/Comments/Edit.vue';
-
-import CartClient from './components/Carts/Index.vue';
+const app = createApp(App);
+app.use(router);
+app.mount('#app');
 
 
-Vue.use(VueRouter);
-Vue.use(VueSweetAlert2);
-// importamos los estilos de Sweet Alert 2
-import "sweetalert2/dist/sweetalert2.min.css";
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
 
-const router = new VueRouter({
-    mode:'history',
-    routes:[
-        {
-            path:'/',
-            component:CommentIndex,
-            name:'comments.index'
-        },
-        {
-            path:'/comments/create',
-            component:CommentCreate,
-            name:'comments.create'
-        },
-        {
-            path:'/comments/edit/:id',
-            component:CommentEdit,
-            name:'comments.edit'
-        },
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-    ]
-})
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-/* Vue.component('comments-index',require('./components/Comments/Index.vue').default); */
-
-Vue.component('pagination', require('laravel-vue-pagination'));
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
 
-const app = new Vue({
-    el:'#app',
-    components:{Appmainvue},
-    router
-  });
