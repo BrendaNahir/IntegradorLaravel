@@ -3,10 +3,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/home" class="brand-link">
-      <img src="https://talentosdigitales.ar/assets/img/logoHeader-green.png" alt="Talento Digital Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PETSHOP</span>
+      <img src="{{ asset('image\logo.jpeg') }}" alt="Talento Digital Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">MASCOTELANDIA</span>
     </a>
-
+    
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->

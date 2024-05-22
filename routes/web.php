@@ -21,8 +21,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@passwordReset')->name('password.reset');
 Route::post('password/reset', 'Auth\ForgotPasswordController@passwordUpdate')->name('password.update');
 
-
-
 Route::group([
     'middleware'    =>  ['auth','adminUserRole'],
     'prefix'        =>  'user'
