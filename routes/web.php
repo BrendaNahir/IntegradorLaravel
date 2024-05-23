@@ -3,6 +3,7 @@
 use App\Http\Controllers\TestNewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\RecommendationController;
 
 
 Route::get('/principal', function () {
@@ -13,6 +14,7 @@ Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('s
 
 
 Route::get('/', 'WelcomeController@indexprincipal');
+Route::get('/recommendation', 'RecommendationController@index');
 
 Auth::routes();
 
@@ -36,6 +38,7 @@ Route::group([
 
 });
 Route::resource('provider', ProviderController::class)->middleware('adminUserRole');
+
 Route::resource('product', ProductController::class)->middleware('adminUserRole');
 Route::resource('purchase', PurchaseProductController::class)->middleware('adminUserRole');
 Route::resource('cart', CartController::class)->middleware('clientUserRole');

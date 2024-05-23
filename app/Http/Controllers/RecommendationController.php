@@ -8,8 +8,8 @@ use App\Models\Recommendation;
 class RecommendationController extends Controller
 {
     public function index()
-    {
+    {dd('stop');
         $recommendations = Recommendation::all();
-        return view('recommendations.index', compact('recommendations'));
+        return view('recommendation.index', compact('recommendation'));
     }
 }

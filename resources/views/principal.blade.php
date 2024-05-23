@@ -125,9 +125,9 @@
                                 </svg>
                             </a></li>
 
-                        <li class="nav-item"><a class="nav-link" href="#">Recomendaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="recommendation">Recomendaciones</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Comentarios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Números útiles</a></li>
+                        
 
 
                     </ul>

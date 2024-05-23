@@ -8,7 +8,7 @@
         </li>
        
         <li class="nav-item d-none d-sm-inline-block">
-            <button href="/principal" class="btn btn-outline-secondary" type="button">Ver como cliente</button>
+<a href="/" class="btn btn-outline-secondary" role="button">Ver como cliente</a>
         </li>
 
 
